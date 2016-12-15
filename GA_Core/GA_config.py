@@ -38,6 +38,11 @@ class GAConfig:
         else:
             raise ValueError('种群规模必须为正整数')
 
-    mutate = None  # 变异函数
-    cross = None  # 交叉函数
-    select =None  # 选择函数
+    mutate = None  # 突变方法
+    cross = None  # 交叉方法
+    select = None  # 选择方法
+    evaluate = None  # 估价函数
+
+    create_individual_gene = None  # 创建个体基因方法
+
+
