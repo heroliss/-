@@ -2,8 +2,8 @@ import random
 from GA_Core.GA_config import GAConfig
 from GA_Core.GA_individual import Individual
 from time import clock  # 测试用
-
-
+from ecology.gene_expression import express_test
+from ecology.environment import array_test_sorted,array_test
 class GA:
     def __init__(self, ga_config: GAConfig):
         self.config = ga_config
@@ -11,9 +11,9 @@ class GA:
         self.population_init()
 
     def create_individual(self):
-        # 根据基因创建函数创建个体
+        # 根据基因生成函数创建个体
         ind = Individual()
-        ind.gene = self.config.create_individual_gene()
+        ind.gene = self.config.func_create_individual_gene()
         return ind
 
     def population_init(self):
@@ -25,18 +25,18 @@ class GA:
         # 扩张种群
         for i in range(count):
             individual = self.create_individual()
-            individual.fitness = self.config.evaluate(individual.gene)
+            individual.fitness = self.config.func_evaluate(individual.gene)
             self.pop.append(individual)
 
     def generate(self):
         # 产生后代
 
-        offspring = self.config.select(self.pop)  # 选择优良个体后代
+        offspring = self.config.func_select(self.pop)  # 选择优良个体后代
 
-        for child1, child2 in zip(offspring[::2],offspring[1::2]):
+        for child1, child2 in zip(offspring[::2], offspring[1::2]):
             if random.random() < self.config.p_cross:
                 # 基因交叉
-                self.config.cross(child1.gene, child2.gene)
+                self.config.func_cross(child1.gene, child2.gene)
                 # 删除旧的适应度
                 child1.fitness = None
                 child2.fitness = None
@@ -44,13 +44,13 @@ class GA:
         for mutant in offspring:
             if random.random() < self.config.p_mutate:
                 # 突变
-                self.config.mutate(mutant.gene)
+                self.config.func_mutate(mutant.gene)
                 mutant.fitness = None
 
         # 为交叉变异和突变后代重新估价
         for ind in offspring:
             if ind.fitness is None:
-                ind.fitness = self.config.evaluate(ind.gene)
+                ind.fitness = self.config.func_evaluate(ind.gene)
 
         # 后代种群替换当前种群
-        self.pop[:] = offspring
+        self.pop = offspring

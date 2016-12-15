@@ -1,4 +1,5 @@
 import random
+import copy
 
 
 def select_roulette_algorithm(pop):  # 轮盘赌选择法
@@ -13,6 +14,6 @@ def select_roulette_algorithm(pop):  # 轮盘赌选择法
         for individual in pop:
             dice -= individual.fitness
             if dice < 0:
-                pop_new.append(individual.copy())
+                pop_new.append(copy.deepcopy(individual))  # 此处需深度拷贝个体！！
                 break
     return pop_new
