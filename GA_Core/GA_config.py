@@ -5,6 +5,7 @@ class GAConfig:
         self.func_select = None  # 选择方法
         self.func_evaluate = None  # 估价函数
         self.func_create_individual_gene = None  # 创建个体基因方法
+        self.weights = (1.0,)  # 适应度权重
 
         self.__p_cross_var = None
         self.__p_mutate_var = None

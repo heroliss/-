@@ -14,6 +14,6 @@ config.func_create_individual_gene = \
     create_individual.create_individual_gene_test  # 创建个体函数
 
 # 设置变量
-config.p_mutate = 0.1 # 突变率
+config.p_mutate = 0.1  # 突变率
 config.p_cross = 0.5  # 交叉率
 config.pop_size = 100  # 种群大小
