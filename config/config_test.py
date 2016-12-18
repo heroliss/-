@@ -1,4 +1,4 @@
-"""加载自定义函数"""
+"""加载自定义函数(置换排序测试)"""
 from GA_Algorithm import cross, select
 from GA_Core.GA_config import GAConfig
 from ecology import evaluate, create_individual, mutate

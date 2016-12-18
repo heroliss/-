@@ -1,4 +1,4 @@
-"""加载deap中的函数"""
+"""加载deap中的函数(置换排序测试)"""
 import random
 from deap import base, tools, creator
 from GA_Core.GA_config import GAConfig
